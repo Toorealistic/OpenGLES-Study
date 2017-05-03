@@ -52,21 +52,25 @@
     return self;
 }
 
-
 - (void)deleteFrameAndRenderBuffers {
     glDeleteFramebuffers(1, &_framebuffers);
     _framebuffers = 0;
     glDeleteRenderbuffers(1, &_renderbuffers);
     _renderbuffers = 0;
+    
 }
 
 - (void)setupFrameAndRenderBuffers {
+    
+    // EAGLContext初始化必须在着色前
+    EAGLContext *context = self.context;
+    
     GLuint renderbuffers;
     glGenRenderbuffers(1, &renderbuffers);
     _renderbuffers = renderbuffers;
     glBindRenderbuffer(GL_RENDERBUFFER, _renderbuffers);
     
-    BOOL storageSuccess = [self.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:self.eAGLLayer];
+    BOOL storageSuccess = [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:self.eAGLLayer];
     if (!storageSuccess) {
 #ifdef DEBUG
         NSLog(@"renderbufferStorageFail");
@@ -105,51 +109,48 @@
 }
 
 - (void)presentRender {
-//    CGFloat scale = [[UIScreen mainScreen] scale];
-//    glViewport(self.frame.origin.x * scale, self.frame.origin.y * scale, self.frame.size.width * scale, self.frame.size.height * scale);
-//    
-//    GLfloat vertexAttribArray[] = {
-//        0.5f, -0.5f, -1.0f,     1.0f, 0.0f,
-//        -0.5f, 0.5f, -1.0f,     0.0f, 1.0f,
-//        -0.5f, -0.5f, -1.0f,    0.0f, 0.0f,
-//        
-//        0.5f, 0.5f, -1.0f,      1.0f, 1.0f,
-//        -0.5f, 0.5f, -1.0f,     0.0f, 1.0f,
-//        0.5f, -0.5f, -1.0f,     1.0f, 0.0f,
-//    };
-//    
-//    GLuint buffer;
-//    glGenBuffers(1, &buffer);
-//    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-//    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexAttribArray), vertexAttribArray, GL_STREAM_DRAW);
-//    
-//    GLuint position = glGetAttribLocation(self.program, "position");
-//    glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (GLfloat *)NULL + 0);
-//    glEnableVertexAttribArray(position);
-//    
-//    GLuint texCoord = glGetAttribLocation(self.program, "texCoord");
-//    glVertexAttribPointer(texCoord, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (GLfloat *)NULL + 3);
-//    glEnableVertexAttribArray(texCoord);
-//    
-//    [self setupTexture];
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    glViewport(self.frame.origin.x * scale, self.frame.origin.y * scale, self.frame.size.width * scale, self.frame.size.height * scale);
     
-//    GLuint matrix = glGetUniformLocation(self.program, "matrix");
-//    
-//    float radians = 10 * 3.14159f / 180.0f;
-//    float s = sin(radians);
-//    float c = cos(radians);
-//    
-//    //z轴旋转矩阵
-//    GLfloat zRotation[16] = { //
-//        c, -s, 0, 0.0, //
-//        s, c, 0, 0.0,//
-//        0, 0, 1.0, 0,//
-//        0, 0, 0, 1.0,//
-//    };
-//    
-//    glUniformMatrix4fv(matrix, 1, GL_FALSE, (GLfloat *)&zRotation[0]);
+    GLfloat vertexAttribArray[] = {
+        0.5f, -0.5f, -1.0f,     0.0f, 1.0f,
+        0.5f, 0.5f, -1.0f,      0.0f, 0.0f,
+        -0.5f, 0.5f, -1.0f,     1.0f, 0.0f,
+        
+        0.5f, -0.5f, -1.0f,     0.0f, 1.0f,
+        -0.5f, 0.5f, -1.0f,     1.0f, 0.0f,
+        -0.5f, -0.5f, -1.0f,    1.0f, 1.0f,
+    };
     
+    GLuint buffer;
+    glGenBuffers(1, &buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexAttribArray), vertexAttribArray, GL_STREAM_DRAW);
     
+    GLuint position = glGetAttribLocation(self.program, "position");
+    glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (GLfloat *)NULL + 0);
+    glEnableVertexAttribArray(position);
+    
+    GLuint texCoord = glGetAttribLocation(self.program, "texCoord");
+    glVertexAttribPointer(texCoord, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (GLfloat *)NULL + 3);
+    glEnableVertexAttribArray(texCoord);
+    
+    [self setupTexture];
+    
+    GLuint matrix = glGetUniformLocation(self.program, "matrix");
+    float radians = M_PI_4;
+    float s = sin(radians);
+    float c = cos(radians);
+    //z轴旋转矩阵
+    GLfloat zRotation[16] = {
+        c, -s, 0, 0.0,
+        s, c, 0, 0.0,
+        0, 0, 1.0, 0,
+        0, 0, 0, 1.0,
+    };
+
+    
+    glUniformMatrix4fv(matrix, 1, GL_FALSE, (GLfloat *)&zRotation[0]);
     glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -220,42 +221,34 @@
 }
 
 - (void)setupTexture {
+    
     NSString *fileName = @"panda.jpg";
-    CGImageRef spriteImage = [UIImage imageNamed:fileName].CGImage;
-    if (!spriteImage) {
-        NSLog(@"Failed to load image %@", fileName);
-        exit(1);
+    CGImageRef imageRef = [UIImage imageNamed:fileName].CGImage;
+    if (!imageRef) {
+#ifdef DEBUG
+        NSLog(@"no image");
+#endif
     }
     
-    // 2 读取图片的大小
-    size_t width = CGImageGetWidth(spriteImage);
-    size_t height = CGImageGetHeight(spriteImage);
+    size_t width = CGImageGetWidth(imageRef);
+    size_t height = CGImageGetHeight(imageRef);
+    GLubyte *data = (GLubyte *)calloc(width * height * 4, sizeof(GLubyte)); //rgba共4个byte
+    CGContextRef contextRef = CGBitmapContextCreate(data, width, height, 8, width * 4, CGImageGetColorSpace(imageRef), kCGImageAlphaPremultipliedLast);
+    CGContextDrawImage(contextRef, CGRectMake(0, 0, width, height), imageRef);
+    CGContextRelease(contextRef);
     
-    GLubyte * spriteData = (GLubyte *) calloc(width * height * 4, sizeof(GLubyte)); //rgba共4个byte
-    
-    CGContextRef spriteContext = CGBitmapContextCreate(spriteData, width, height, 8, width*4,
-                                                       CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);
-    
-    // 3在CGContextRef上绘图
-    CGContextDrawImage(spriteContext, CGRectMake(0, 0, width, height), spriteImage);
-    
-    CGContextRelease(spriteContext);
-    
-    // 4绑定纹理到默认的纹理ID（这里只有一张图片，故而相当于默认于片元着色器里面的colorMap，如果有多张图不可以这么做）
+    //(这里只有一张图片，故而相当于默认于片元着色器里面的colorMap，如果有多张图不可以这么做）
     glBindTexture(GL_TEXTURE_2D, 0);
     
-    
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
     float fw = width, fh = height;
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fw, fh, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
-    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fw, fh, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
     glBindTexture(GL_TEXTURE_2D, 0);
-    
-    free(spriteData);
+    free(data);
 }
 
 /*
