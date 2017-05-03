@@ -21,6 +21,7 @@
     
     ShaderView *shaderView = [[ShaderView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:shaderView];
+    
 }
 
 - (void)didReceiveMemoryWarning {

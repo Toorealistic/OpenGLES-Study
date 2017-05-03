@@ -25,11 +25,11 @@
     
     [self setupConfig];
     
-    [self setupVertexArrayAndTexture];
+    [self setupVertexAttribArrayAndTexture];
 }
 
-- (void)setupVertexArrayAndTexture {
-    GLfloat vertexArray[] = {
+- (void)setupVertexAttribArrayAndTexture {
+    GLfloat vertexAttribArray[] = {
         0.5, -0.5,    1.0f, 0.0f,
         0.5, 0.5,     1.0f, 1.0f,
         -0.0, 0.5,    0.0f, 1.0f,
@@ -50,7 +50,7 @@
     GLuint buffer;
     glGenBuffers(1, &buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexArray), vertexArray, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexAttribArray), vertexAttribArray, GL_STREAM_DRAW);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, (GLfloat *)NULL + 0);

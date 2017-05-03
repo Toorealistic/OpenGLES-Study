@@ -67,7 +67,7 @@
 - (NSArray *)dataList {
     
     _dataList = @[@[@"GLKit", @"GLKitStudyController"],
-                  ];
+                  @[@"Shader", @"ShaderStudyController"],];
     
     return _dataList;
 }
