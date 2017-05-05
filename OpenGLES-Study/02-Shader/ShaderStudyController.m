@@ -19,8 +19,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    ShaderView *shaderView = [[ShaderView alloc] initWithFrame:self.view.frame];
+    ShaderView *shaderView = [[ShaderView alloc] initWithFrame:self.view.frame bundleName:@"Shader"];
     [self.view addSubview:shaderView];
+    [shaderView render];
     
 }
 

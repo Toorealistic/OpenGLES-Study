@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		631A69F21EBC4BE500CCCFA6 /* 3DStudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 631A69F11EBC4BE500CCCFA6 /* 3DStudyController.m */; };
+		631A69F81EBC5B8400CCCFA6 /* Shader.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 631A69F71EBC5B8400CCCFA6 /* Shader.bundle */; };
+		631A69FA1EBC5D9E00CCCFA6 /* 3D.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 631A69F91EBC5D9E00CCCFA6 /* 3D.bundle */; };
+		631A6A021EBC64DA00CCCFA6 /* GLESMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 631A69FC1EBC64DA00CCCFA6 /* GLESMath.c */; };
+		631A6A031EBC64DA00CCCFA6 /* GLESUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 631A69FF1EBC64DA00CCCFA6 /* GLESUtils.m */; };
 		63B46DA01EB96E7E0071AB5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46D9F1EB96E7E0071AB5F /* main.m */; };
 		63B46DA31EB96E7E0071AB5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DA21EB96E7E0071AB5F /* AppDelegate.m */; };
 		63B46DA61EB96E7E0071AB5F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DA51EB96E7E0071AB5F /* ViewController.m */; };
@@ -22,8 +27,6 @@
 		63B46DE01EB978C10071AB5F /* panda.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63B46DDF1EB978C10071AB5F /* panda.jpg */; };
 		63B46DE91EB9A8950071AB5F /* ShaderStudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DE81EB9A8950071AB5F /* ShaderStudyController.m */; };
 		63B46DEC1EB9A8F50071AB5F /* ShaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DEB1EB9A8F50071AB5F /* ShaderView.m */; };
-		63B46DF21EB9B7860071AB5F /* shaderv.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 63B46DF11EB9B7860071AB5F /* shaderv.vsh */; };
-		63B46DF41EB9B8DA0071AB5F /* shaderf.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 63B46DF31EB9B8DA0071AB5F /* shaderf.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		631A69F01EBC4BE500CCCFA6 /* 3DStudyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3DStudyController.h; sourceTree = "<group>"; };
+		631A69F11EBC4BE500CCCFA6 /* 3DStudyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 3DStudyController.m; sourceTree = "<group>"; };
+		631A69F71EBC5B8400CCCFA6 /* Shader.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Shader.bundle; sourceTree = "<group>"; };
+		631A69F91EBC5D9E00CCCFA6 /* 3D.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = 3D.bundle; sourceTree = "<group>"; };
+		631A69FC1EBC64DA00CCCFA6 /* GLESMath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GLESMath.c; sourceTree = "<group>"; };
+		631A69FD1EBC64DA00CCCFA6 /* GLESMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLESMath.h; sourceTree = "<group>"; };
+		631A69FE1EBC64DA00CCCFA6 /* GLESUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLESUtils.h; sourceTree = "<group>"; };
+		631A69FF1EBC64DA00CCCFA6 /* GLESUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLESUtils.m; sourceTree = "<group>"; };
+		631A6A001EBC64DA00CCCFA6 /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
+		631A6A011EBC64DA00CCCFA6 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		63B46D9B1EB96E7E0071AB5F /* OpenGLES-Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenGLES-Study.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B46D9F1EB96E7E0071AB5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63B46DA11EB96E7E0071AB5F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -72,8 +85,6 @@
 		63B46DE81EB9A8950071AB5F /* ShaderStudyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderStudyController.m; sourceTree = "<group>"; };
 		63B46DEA1EB9A8F50071AB5F /* ShaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderView.h; sourceTree = "<group>"; };
 		63B46DEB1EB9A8F50071AB5F /* ShaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderView.m; sourceTree = "<group>"; };
-		63B46DF11EB9B7860071AB5F /* shaderv.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderv.vsh; sourceTree = "<group>"; };
-		63B46DF31EB9B8DA0071AB5F /* shaderf.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shaderf.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +114,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		631A69EF1EBC4BCC00CCCFA6 /* 03-3D */ = {
+			isa = PBXGroup;
+			children = (
+				631A69F01EBC4BE500CCCFA6 /* 3DStudyController.h */,
+				631A69F11EBC4BE500CCCFA6 /* 3DStudyController.m */,
+				631A69F91EBC5D9E00CCCFA6 /* 3D.bundle */,
+			);
+			path = "03-3D";
+			sourceTree = "<group>";
+		};
+		631A69FB1EBC64DA00CCCFA6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				631A69FC1EBC64DA00CCCFA6 /* GLESMath.c */,
+				631A69FD1EBC64DA00CCCFA6 /* GLESMath.h */,
+				631A69FE1EBC64DA00CCCFA6 /* GLESUtils.h */,
+				631A69FF1EBC64DA00CCCFA6 /* GLESUtils.m */,
+				631A6A001EBC64DA00CCCFA6 /* Quaternion.h */,
+				631A6A011EBC64DA00CCCFA6 /* Vector.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		63B46D921EB96E7E0071AB5F = {
 			isa = PBXGroup;
 			children = (
@@ -134,9 +168,11 @@
 				63B46DA51EB96E7E0071AB5F /* ViewController.m */,
 				63B46DD21EB972300071AB5F /* BaseViewController.h */,
 				63B46DD31EB972300071AB5F /* BaseViewController.m */,
+				631A69FB1EBC64DA00CCCFA6 /* Utils */,
 				63B46DDE1EB978BB0071AB5F /* Resource */,
 				63B46DD11EB970850071AB5F /* 01-GLKit */,
 				63B46DE61EB9A8570071AB5F /* 02-Shader */,
+				631A69EF1EBC4BCC00CCCFA6 /* 03-3D */,
 				63B46DA71EB96E7E0071AB5F /* Main.storyboard */,
 				63B46DAA1EB96E7E0071AB5F /* Assets.xcassets */,
 				63B46DAC1EB96E7E0071AB5F /* LaunchScreen.storyboard */,
@@ -205,8 +241,7 @@
 				63B46DE81EB9A8950071AB5F /* ShaderStudyController.m */,
 				63B46DEA1EB9A8F50071AB5F /* ShaderView.h */,
 				63B46DEB1EB9A8F50071AB5F /* ShaderView.m */,
-				63B46DF11EB9B7860071AB5F /* shaderv.vsh */,
-				63B46DF31EB9B8DA0071AB5F /* shaderf.fsh */,
+				631A69F71EBC5B8400CCCFA6 /* Shader.bundle */,
 			);
 			path = "02-Shader";
 			sourceTree = "<group>";
@@ -318,10 +353,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63B46DF21EB9B7860071AB5F /* shaderv.vsh in Resources */,
 				63B46DAE1EB96E7E0071AB5F /* LaunchScreen.storyboard in Resources */,
+				631A69F81EBC5B8400CCCFA6 /* Shader.bundle in Resources */,
+				631A69FA1EBC5D9E00CCCFA6 /* 3D.bundle in Resources */,
 				63B46DE01EB978C10071AB5F /* panda.jpg in Resources */,
-				63B46DF41EB9B8DA0071AB5F /* shaderf.fsh in Resources */,
 				63B46DAB1EB96E7E0071AB5F /* Assets.xcassets in Resources */,
 				63B46DA91EB96E7E0071AB5F /* Main.storyboard in Resources */,
 			);
@@ -350,10 +385,13 @@
 			files = (
 				63B46DA61EB96E7E0071AB5F /* ViewController.m in Sources */,
 				63B46DD41EB972300071AB5F /* BaseViewController.m in Sources */,
+				631A6A031EBC64DA00CCCFA6 /* GLESUtils.m in Sources */,
+				631A69F21EBC4BE500CCCFA6 /* 3DStudyController.m in Sources */,
 				63B46DA31EB96E7E0071AB5F /* AppDelegate.m in Sources */,
 				63B46DA01EB96E7E0071AB5F /* main.m in Sources */,
 				63B46DEC1EB9A8F50071AB5F /* ShaderView.m in Sources */,
 				63B46DE91EB9A8950071AB5F /* ShaderStudyController.m in Sources */,
+				631A6A021EBC64DA00CCCFA6 /* GLESMath.c in Sources */,
 				63B46DD81EB972A30071AB5F /* GLKitStudyController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

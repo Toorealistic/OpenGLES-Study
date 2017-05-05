@@ -10,4 +10,12 @@
 
 @interface ShaderView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame bundleName:(NSString *)bundleName;
+
+- (void)render;
+
+- (void)render3D;
+
+@property (nonatomic, assign) GLfloat angle;
+
 @end

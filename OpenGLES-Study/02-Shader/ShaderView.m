@@ -8,6 +8,7 @@
 
 #import "ShaderView.h"
 #import <OpenGLES/ES2/gl.h>
+#import "GLESMath.h"
 
 @interface ShaderView ()
 
@@ -23,6 +24,8 @@
 
 @property (nonatomic, assign) GLuint program;
 
+@property (nonatomic, assign) GLuint vertices;
+
 @end
 
 @implementation ShaderView
@@ -35,7 +38,7 @@
     [self deleteFrameAndRenderBuffers];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame bundleName:(NSString *)bundleName {
     self = [super initWithFrame:frame];
     if (self) {
         _lock = [[NSLock alloc] init];
@@ -44,9 +47,7 @@
         
         [self setupFrameAndRenderBuffers];
         
-        if ([self linkProgram]) {
-            [self presentRender];
-        }
+        [self linkProgram:bundleName];
     }
     
     return self;
@@ -57,7 +58,6 @@
     _framebuffers = 0;
     glDeleteRenderbuffers(1, &_renderbuffers);
     _renderbuffers = 0;
-    
 }
 
 - (void)setupFrameAndRenderBuffers {
@@ -85,9 +85,15 @@
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _renderbuffers);
 }
 
-- (BOOL)linkProgram {
-    NSString *vFilePath = [[NSBundle mainBundle] pathForResource:@"shaderv" ofType:@"vsh"];
-    NSString *fFilePath = [[NSBundle mainBundle] pathForResource:@"shaderf" ofType:@"fsh"];
+- (void)linkProgram:(NSString *)bundleName {
+    NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSBundle mainBundle] pathForResource:bundleName ofType:@"bundle"]];
+    NSString *vFilePath = [bundle pathForResource:@"shaderv" ofType:@"glsl"];
+    NSString *fFilePath = [bundle pathForResource:@"shaderf" ofType:@"glsl"];
+    
+    if (_program) {
+        glDeleteProgram(_program);
+        _program = 0;
+    }
     
     _program = [self loadShaders:vFilePath fragment:fFilePath];
     glLinkProgram(_program);
@@ -100,15 +106,12 @@
 #ifdef DEBUG
         NSLog(@"linkError:%@", error);
 #endif
-        return NO;
     } else {
         glUseProgram(_program);
-        
-        return YES;
     }
 }
 
-- (void)presentRender {
+- (void)render {
     CGFloat scale = [[UIScreen mainScreen] scale];
     glViewport(self.frame.origin.x * scale, self.frame.origin.y * scale, self.frame.size.width * scale, self.frame.size.height * scale);
     
@@ -148,9 +151,8 @@
         0, 0, 1.0, 0,
         0, 0, 0, 1.0,
     };
-
-    
     glUniformMatrix4fv(matrix, 1, GL_FALSE, (GLfloat *)&zRotation[0]);
+    
     glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -158,6 +160,76 @@
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
+- (void)render3D {
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    glViewport(self.frame.origin.x * scale, self.frame.origin.y * scale, self.frame.size.width * scale, self.frame.size.height * scale);
+    
+    // 4个等边三角形 // 未计算好
+    GLuint indices[] = {
+        0, 1, 2,
+        0, 1, 3,
+        0, 3, 2,
+        1, 2, 3,
+    };
+    
+    float num = sqrtf(0.5 * 0.5 - 0.25 * 0.25);
+    float num_2 = num / 2.0;
+    GLfloat vertexAttribArray[] = {
+        0.0f, num, 0.0f,                      0.0f, 0.0f, 1.0f,
+        -sqrtf(3.0) * num_2, -num_2, 0.0f,    0.0f, 1.0f, 0.0f,
+        sqrtf(3.0) * num_2, -num_2, 0.0f,     1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 0.75f,                    1.0f, 1.0f, 1.0f,
+    };
+    if (_vertices == 0) {
+        glGenBuffers(1, &_vertices);
+    }
+    glBindBuffer(GL_ARRAY_BUFFER, _vertices);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexAttribArray), vertexAttribArray, GL_DYNAMIC_DRAW);
+    
+    GLuint position = glGetAttribLocation(self.program, "position");
+    glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (GLfloat *)NULL + 0);
+    glEnableVertexAttribArray(position);
+    
+    GLuint positionColor = glGetAttribLocation(self.program, "positionColor");
+    glVertexAttribPointer(positionColor, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 6, (float *)NULL + 3);
+    glEnableVertexAttribArray(positionColor);
+    
+    GLuint projectionMatrixSlot = glGetUniformLocation(self.program, "projectionMatrix");
+    GLuint modelViewMatrixSlot = glGetUniformLocation(self.program, "modelViewMatrix");
+    
+    float width = self.frame.size.width;
+    float height = self.frame.size.height;
+    float aspect = width / height;
+    
+    KSMatrix4 _projectionMatrix;
+    ksMatrixLoadIdentity(&_projectionMatrix);
+    ksPerspective(&_projectionMatrix, 30.0, aspect, 5.0f, 20.0f); //透视变换，视角30°
+    glUniformMatrix4fv(projectionMatrixSlot, 1, GL_FALSE, (GLfloat*)&_projectionMatrix.m[0][0]);
+    glEnable(GL_CULL_FACE);
+    
+    KSMatrix4 _modelViewMatrix;
+    ksMatrixLoadIdentity(&_modelViewMatrix);
+    ksTranslate(&_modelViewMatrix, 0.0, 0.0, -10.0);
+    
+    KSMatrix4 _rotationMatrix;
+    ksMatrixLoadIdentity(&_rotationMatrix);
+    ksRotate(&_rotationMatrix, _angle, 1.0, 0.0, 0.0); //绕X轴
+//    ksRotate(&_rotationMatrix, _angle, 0.0, 1.0, 0.0); //绕Y轴
+//    ksRotate(&_rotationMatrix, _angle, 0.0, 0.0, 1.0); //绕Z轴
+    
+    //把变换矩阵相乘，注意先后顺序
+    ksMatrixMultiply(&_modelViewMatrix, &_rotationMatrix, &_modelViewMatrix);
+    
+    glUniformMatrix4fv(modelViewMatrixSlot, 1, GL_FALSE, (GLfloat*)&_modelViewMatrix.m[0][0]);
+    
+    
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(indices[0]), GL_UNSIGNED_INT, indices);
+    
+    [self.context presentRenderbuffer:GL_RENDERBUFFER];
+}
 
 - (CAEAGLLayer *)eAGLLayer {
     if (!_eAGLLayer) {
