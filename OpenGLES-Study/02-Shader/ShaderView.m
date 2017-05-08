@@ -164,22 +164,50 @@
     CGFloat scale = [[UIScreen mainScreen] scale];
     glViewport(self.frame.origin.x * scale, self.frame.origin.y * scale, self.frame.size.width * scale, self.frame.size.height * scale);
     
-    // 4个等边三角形 // 未计算好
+    // 4个等边三角形
     GLuint indices[] = {
-        0, 1, 2,
+        0, 2, 1,
         0, 1, 3,
         0, 3, 2,
         1, 2, 3,
     };
     
-    float num = sqrtf(0.5 * 0.5 - 0.25 * 0.25);
-    float num_2 = num / 2.0;
+    float AX = 0.0;
+    float AY = sqrtf(3.0) / 6.0;
+    float AZ = 0.0;
+    float BX = -0.25;
+    float BY = -(sqrtf(3.0) / 12.0);
+    float BZ = 0.0;
+    float CX = -BX;
+    float CY = BY;
+    float CZ = BZ;
+    float DX = AX;
+    float DY = 0.0;
+    float DZ = sqrtf(6.0) / 6.0;
     GLfloat vertexAttribArray[] = {
-        0.0f, num, 0.0f,                      0.0f, 0.0f, 1.0f,
-        -sqrtf(3.0) * num_2, -num_2, 0.0f,    0.0f, 1.0f, 0.0f,
-        sqrtf(3.0) * num_2, -num_2, 0.0f,     1.0f, 0.0f, 0.0f,
-        0.0f, 0.0f, 0.75f,                    1.0f, 1.0f, 1.0f,
+        AX, AY, AZ,  0.0f, 0.0f, 1.0f,
+        BX, BY, BZ,  0.0f, 1.0f, 0.0f,
+        CX, CY, CZ,  1.0f, 0.0f, 0.0f,
+        DX, DY, DZ,  1.0f, 1.0f, 1.0f,
     };
+    
+//    GLuint indices[] = {
+//        0, 3, 2,
+//        0, 1, 3,
+//        0, 2, 4,
+//        0, 4, 1,
+//        1, 4, 3,
+//        2, 3, 4,
+//    };
+//
+//    GLfloat vertexAttribArray[] = {
+//        -0.5, 0.5, 0.0,  0.0f, 0.0f, 1.0f,
+//        0.5, 0.5, 0.0,  0.0f, 1.0f, 0.0f,
+//        -0.5, -0.5, 0.0,  1.0f, 0.0f, 0.0f,
+//        0.5, -0.5, 0.0,  1.0f, 1.0f, 1.0f,
+//        0.0, 0.0, 0.5,  1.0f, 0.0f, 1.0f,
+//    };
+    
     if (_vertices == 0) {
         glGenBuffers(1, &_vertices);
     }
