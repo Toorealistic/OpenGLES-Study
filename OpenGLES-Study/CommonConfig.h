@@ -9,6 +9,8 @@
 #ifndef CommonConfig_h
 #define CommonConfig_h
 
+#import <GLKit/GLKit.h>
+
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 

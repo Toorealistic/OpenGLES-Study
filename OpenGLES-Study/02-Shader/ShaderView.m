@@ -153,7 +153,7 @@
     };
     glUniformMatrix4fv(matrix, 1, GL_FALSE, (GLfloat *)&zRotation[0]);
     
-    glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -173,17 +173,17 @@
     };
     
     float AX = 0.0;
-    float AY = sqrtf(3.0) / 6.0;
+    float AY = sqrtf(3.0) / 3.0;
     float AZ = 0.0;
-    float BX = -0.25;
-    float BY = -(sqrtf(3.0) / 12.0);
+    float BX = -0.5;
+    float BY = -(sqrtf(3.0) / 6.0);
     float BZ = 0.0;
     float CX = -BX;
     float CY = BY;
     float CZ = BZ;
     float DX = AX;
     float DY = 0.0;
-    float DZ = sqrtf(6.0) / 6.0;
+    float DZ = sqrtf(6.0) / 3.0;
     GLfloat vertexAttribArray[] = {
         AX, AY, AZ,  0.0f, 0.0f, 1.0f,
         BX, BY, BZ,  0.0f, 1.0f, 0.0f,
@@ -251,7 +251,7 @@
     glUniformMatrix4fv(modelViewMatrixSlot, 1, GL_FALSE, (GLfloat*)&_modelViewMatrix.m[0][0]);
     
     
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(indices[0]), GL_UNSIGNED_INT, indices);

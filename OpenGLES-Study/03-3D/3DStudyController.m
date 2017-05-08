@@ -23,8 +23,10 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    dispatch_source_cancel(_timer);
-    _timer = nil;
+    if (_timer) {
+        dispatch_source_cancel(_timer);
+        _timer = nil;
+    }
 }
 
 - (void)viewDidLoad {

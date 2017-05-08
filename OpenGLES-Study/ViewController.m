@@ -25,7 +25,7 @@
     self.title = @"OpenGLES-Study";
     
     [self.view addSubview:self.tableView];
-    _tableView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    _tableView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight - 64);
     
 }
 
@@ -69,7 +69,7 @@
     _dataList = @[@[@"GLKit", @"GLKitStudyController"],
                   @[@"Shader", @"ShaderStudyController"],
                   @[@"3D", @"_DStudyController"],
-                  @[@"VR", @"VRStudyController"],];
+                  @[@"GLKitTwo", @"GLKitTwoStudyController"],];
     
     return _dataList;
 }

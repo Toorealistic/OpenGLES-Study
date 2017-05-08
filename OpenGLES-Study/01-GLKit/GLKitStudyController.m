@@ -74,13 +74,12 @@
     glkView.drawableStencilFormat = GLKViewDrawableStencilFormatNone;
     glkView.drawableMultisample = GLKViewDrawableMultisampleNone;
     glkView.delegate = self;
-    glkView.context = self.context;
     [EAGLContext setCurrentContext:self.context];
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
-    glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     [self.effect prepareToDraw];
     glDrawArrays(GL_TRIANGLES, 0, 12);

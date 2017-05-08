@@ -27,6 +27,7 @@
 		63B46DE01EB978C10071AB5F /* panda.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63B46DDF1EB978C10071AB5F /* panda.jpg */; };
 		63B46DE91EB9A8950071AB5F /* ShaderStudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DE81EB9A8950071AB5F /* ShaderStudyController.m */; };
 		63B46DEC1EB9A8F50071AB5F /* ShaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DEB1EB9A8F50071AB5F /* ShaderView.m */; };
+		63D33EBD1EC000DF002D49BB /* GLKitTwoStudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D33EBC1EC000DF002D49BB /* GLKitTwoStudyController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,8 @@
 		63B46DE81EB9A8950071AB5F /* ShaderStudyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderStudyController.m; sourceTree = "<group>"; };
 		63B46DEA1EB9A8F50071AB5F /* ShaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderView.h; sourceTree = "<group>"; };
 		63B46DEB1EB9A8F50071AB5F /* ShaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderView.m; sourceTree = "<group>"; };
+		63D33EBB1EC000DF002D49BB /* GLKitTwoStudyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKitTwoStudyController.h; sourceTree = "<group>"; };
+		63D33EBC1EC000DF002D49BB /* GLKitTwoStudyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKitTwoStudyController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +176,7 @@
 				63B46DD11EB970850071AB5F /* 01-GLKit */,
 				63B46DE61EB9A8570071AB5F /* 02-Shader */,
 				631A69EF1EBC4BCC00CCCFA6 /* 03-3D */,
+				63D33EBA1EC000BE002D49BB /* 04-GLKitTwo */,
 				63B46DA71EB96E7E0071AB5F /* Main.storyboard */,
 				63B46DAA1EB96E7E0071AB5F /* Assets.xcassets */,
 				63B46DAC1EB96E7E0071AB5F /* LaunchScreen.storyboard */,
@@ -244,6 +248,15 @@
 				631A69F71EBC5B8400CCCFA6 /* Shader.bundle */,
 			);
 			path = "02-Shader";
+			sourceTree = "<group>";
+		};
+		63D33EBA1EC000BE002D49BB /* 04-GLKitTwo */ = {
+			isa = PBXGroup;
+			children = (
+				63D33EBB1EC000DF002D49BB /* GLKitTwoStudyController.h */,
+				63D33EBC1EC000DF002D49BB /* GLKitTwoStudyController.m */,
+			);
+			path = "04-GLKitTwo";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +406,7 @@
 				63B46DE91EB9A8950071AB5F /* ShaderStudyController.m in Sources */,
 				631A6A021EBC64DA00CCCFA6 /* GLESMath.c in Sources */,
 				63B46DD81EB972A30071AB5F /* GLKitStudyController.m in Sources */,
+				63D33EBD1EC000DF002D49BB /* GLKitTwoStudyController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
