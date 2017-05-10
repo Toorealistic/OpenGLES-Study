@@ -20,15 +20,6 @@
 
 @implementation _DStudyController
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if (_timer) {
-        dispatch_source_cancel(_timer);
-        _timer = nil;
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -40,8 +31,10 @@
     dispatch_queue_t queue = dispatch_get_main_queue();
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
     dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 0.05 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    
+    __weak typeof(self) weakSelf = self;
     dispatch_source_set_event_handler(_timer, ^{
-        [self render3D];
+        [weakSelf render3D];
     });
     dispatch_resume(_timer);
 }

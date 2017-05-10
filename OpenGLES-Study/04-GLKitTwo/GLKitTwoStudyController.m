@@ -27,16 +27,6 @@
 
 @implementation GLKitTwoStudyController
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if (_timer) {
-        dispatch_source_cancel(_timer);
-        _timer = nil;
-    }
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -112,9 +102,11 @@
 }
 
 - (void)startAnimation {
+    __weak typeof(self) weakSelf = self;
     dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC, 0.0 * NSEC_PER_SEC);
     dispatch_source_set_event_handler(_timer, ^{
-        self.xRadians -= 0.1;
+        weakSelf.xRadians -= 0.1;
+        NSLog(@"startAnimation");
     });
     dispatch_resume(_timer);
 }
