@@ -28,21 +28,8 @@
                                                                       NSForegroundColorAttributeName:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
                                                                       NSFontAttributeName:[UIFont systemFontOfSize:20],
                                                                       NSShadowAttributeName:shadow}];
-    
-    self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:1.0 alpha:1.0];
-    
-    if (self.navigationController.viewControllers.count > 1) {
-        UIButton *backBtn= [UIButton buttonWithType:UIButtonTypeCustom];
-        [backBtn setFrame:CGRectMake(0, 0, 60, 30)];
-        [backBtn setTitle:@"返回" forState:UIControlStateNormal];
-        [backBtn addTarget:self action:@selector(backAct) forControlEvents:UIControlEventTouchUpInside];
-        [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backBtn]];
-    }
 }
 
-- (void)backAct {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

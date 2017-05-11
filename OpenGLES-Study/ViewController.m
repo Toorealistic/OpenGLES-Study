@@ -69,7 +69,8 @@
     _dataList = @[@[@"GLKit", @"GLKitStudyController"],
                   @[@"Shader", @"ShaderStudyController"],
                   @[@"3D", @"_DStudyController"],
-                  @[@"GLKitTwo", @"GLKitTwoStudyController"],];
+                  @[@"GLKitTwo", @"GLKitTwoStudyController"],
+                  @[@"EarthMoon", @"EarthMoonStudyController"],];
     
     return _dataList;
 }

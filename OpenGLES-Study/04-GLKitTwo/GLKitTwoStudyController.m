@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) EAGLContext *context;
 
-@property (nonatomic, strong) GLKBaseEffect *effect;
+@property (nonatomic, strong) GLKBaseEffect *baseEffect;
 
 @property (nonatomic, strong) dispatch_source_t timer;
 
@@ -33,9 +33,29 @@
     
     [self setupConfig];
     
+    [self setupTransform];
+    
     [self setupVertexAttribArrayAndTexture];
     
     [self startAnimation];
+}
+
+- (void)setupConfig {
+    [self.view addSubview:self.glkView];
+    [EAGLContext setCurrentContext:self.context];
+    
+    glEnable(GL_DEPTH_TEST);
+}
+
+- (void)setupTransform {
+    CGSize size = self.view.bounds.size;
+    float aspect = fabs(size.width / size.height);
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(M_PI_2, aspect, 0.1f, 10.f);
+    projectionMatrix = GLKMatrix4Scale(projectionMatrix, 1.0f, 1.0f, 1.0f);
+    self.baseEffect.transform.projectionMatrix = projectionMatrix;
+    
+    GLKMatrix4 modelViewMatrix = GLKMatrix4Translate(GLKMatrix4Identity, 0.0f, 0.0f, -2.0f);
+    self.baseEffect.transform.modelviewMatrix = modelViewMatrix;
 }
 
 - (void)setupVertexAttribArrayAndTexture {
@@ -81,24 +101,8 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"panda" ofType:@"jpg"];
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@1, GLKTextureLoaderOriginBottomLeft, nil];
     GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:nil];
-    self.effect.texture2d0.enabled = YES;
-    self.effect.texture2d0.name = textureInfo.name;
-    
-    CGSize size = self.view.bounds.size;
-    float aspect = fabs(size.width / size.height);
-    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(M_PI_2, aspect, 0.1f, 10.f);
-    projectionMatrix = GLKMatrix4Scale(projectionMatrix, 1.0f, 1.0f, 1.0f);
-    self.effect.transform.projectionMatrix = projectionMatrix;
-    
-    GLKMatrix4 modelViewMatrix = GLKMatrix4Translate(GLKMatrix4Identity, 0.0f, 0.0f, -2.0f);
-    self.effect.transform.modelviewMatrix = modelViewMatrix;
-}
-
-- (void)setupConfig {
-    [self.view addSubview:self.glkView];
-    [EAGLContext setCurrentContext:self.context];
-    
-    glEnable(GL_DEPTH_TEST);
+    self.baseEffect.texture2d0.enabled = YES;
+    self.baseEffect.texture2d0.name = textureInfo.name;
 }
 
 - (void)startAnimation {
@@ -116,7 +120,7 @@
     
     modelViewMatrix = GLKMatrix4RotateX(modelViewMatrix, self.xRadians);
     
-    self.effect.transform.modelviewMatrix = modelViewMatrix;
+    self.baseEffect.transform.modelviewMatrix = modelViewMatrix;
     
     // 手动执行GLKView的绘制
     [_glkView display];
@@ -126,7 +130,7 @@
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    [self.effect prepareToDraw];
+    [self.baseEffect prepareToDraw];
     glDrawElements(GL_TRIANGLES, _count, GL_UNSIGNED_INT, 0);
 }
 
@@ -151,12 +155,12 @@
     return _context;
 }
 
-- (GLKBaseEffect *)effect {
-    if (!_effect) {
-        _effect = [[GLKBaseEffect alloc] init];
+- (GLKBaseEffect *)baseEffect {
+    if (!_baseEffect) {
+        _baseEffect = [[GLKBaseEffect alloc] init];
     }
     
-    return _effect;
+    return _baseEffect;
 }
 
 - (dispatch_source_t)timer {

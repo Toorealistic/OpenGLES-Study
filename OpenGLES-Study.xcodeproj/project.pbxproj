@@ -12,6 +12,11 @@
 		631A69FA1EBC5D9E00CCCFA6 /* 3D.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 631A69F91EBC5D9E00CCCFA6 /* 3D.bundle */; };
 		631A6A021EBC64DA00CCCFA6 /* GLESMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 631A69FC1EBC64DA00CCCFA6 /* GLESMath.c */; };
 		631A6A031EBC64DA00CCCFA6 /* GLESUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 631A69FF1EBC64DA00CCCFA6 /* GLESUtils.m */; };
+		638BA8741EC406D20057717D /* EarthMoonStudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638BA8731EC406D20057717D /* EarthMoonStudyController.m */; };
+		638BA87A1EC412760057717D /* Earth512x256.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 638BA8761EC412760057717D /* Earth512x256.jpg */; };
+		638BA87B1EC412760057717D /* Moon256x128.png in Resources */ = {isa = PBXBuildFile; fileRef = 638BA8771EC412760057717D /* Moon256x128.png */; };
+		638BA87C1EC412760057717D /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 638BA8791EC412760057717D /* sphere.obj */; };
+		638BA8881EC431AD0057717D /* AGLKVertexAttribArrayBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 638BA8871EC431AD0057717D /* AGLKVertexAttribArrayBuffer.m */; };
 		63B46DA01EB96E7E0071AB5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46D9F1EB96E7E0071AB5F /* main.m */; };
 		63B46DA31EB96E7E0071AB5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DA21EB96E7E0071AB5F /* AppDelegate.m */; };
 		63B46DA61EB96E7E0071AB5F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DA51EB96E7E0071AB5F /* ViewController.m */; };
@@ -58,6 +63,14 @@
 		631A69FF1EBC64DA00CCCFA6 /* GLESUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLESUtils.m; sourceTree = "<group>"; };
 		631A6A001EBC64DA00CCCFA6 /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
 		631A6A011EBC64DA00CCCFA6 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		638BA8721EC406D20057717D /* EarthMoonStudyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthMoonStudyController.h; sourceTree = "<group>"; };
+		638BA8731EC406D20057717D /* EarthMoonStudyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthMoonStudyController.m; sourceTree = "<group>"; };
+		638BA8761EC412760057717D /* Earth512x256.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Earth512x256.jpg; sourceTree = "<group>"; };
+		638BA8771EC412760057717D /* Moon256x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moon256x128.png; sourceTree = "<group>"; };
+		638BA8781EC412760057717D /* sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sphere.h; sourceTree = "<group>"; };
+		638BA8791EC412760057717D /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
+		638BA8861EC431AD0057717D /* AGLKVertexAttribArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLKVertexAttribArrayBuffer.h; sourceTree = "<group>"; };
+		638BA8871EC431AD0057717D /* AGLKVertexAttribArrayBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLKVertexAttribArrayBuffer.m; sourceTree = "<group>"; };
 		63B46D9B1EB96E7E0071AB5F /* OpenGLES-Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenGLES-Study.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B46D9F1EB96E7E0071AB5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63B46DA11EB96E7E0071AB5F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -140,6 +153,36 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		638BA8711EC406A20057717D /* 05-EarthMoon */ = {
+			isa = PBXGroup;
+			children = (
+				638BA8721EC406D20057717D /* EarthMoonStudyController.h */,
+				638BA8731EC406D20057717D /* EarthMoonStudyController.m */,
+				638BA8751EC412760057717D /* res */,
+			);
+			path = "05-EarthMoon";
+			sourceTree = "<group>";
+		};
+		638BA8751EC412760057717D /* res */ = {
+			isa = PBXGroup;
+			children = (
+				638BA8761EC412760057717D /* Earth512x256.jpg */,
+				638BA8771EC412760057717D /* Moon256x128.png */,
+				638BA8781EC412760057717D /* sphere.h */,
+				638BA8791EC412760057717D /* sphere.obj */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		638BA8851EC431AD0057717D /* Kit */ = {
+			isa = PBXGroup;
+			children = (
+				638BA8861EC431AD0057717D /* AGLKVertexAttribArrayBuffer.h */,
+				638BA8871EC431AD0057717D /* AGLKVertexAttribArrayBuffer.m */,
+			);
+			path = Kit;
+			sourceTree = "<group>";
+		};
 		63B46D921EB96E7E0071AB5F = {
 			isa = PBXGroup;
 			children = (
@@ -171,12 +214,14 @@
 				63B46DA51EB96E7E0071AB5F /* ViewController.m */,
 				63B46DD21EB972300071AB5F /* BaseViewController.h */,
 				63B46DD31EB972300071AB5F /* BaseViewController.m */,
+				638BA8851EC431AD0057717D /* Kit */,
 				631A69FB1EBC64DA00CCCFA6 /* Utils */,
 				63B46DDE1EB978BB0071AB5F /* Resource */,
 				63B46DD11EB970850071AB5F /* 01-GLKit */,
 				63B46DE61EB9A8570071AB5F /* 02-Shader */,
 				631A69EF1EBC4BCC00CCCFA6 /* 03-3D */,
 				63D33EBA1EC000BE002D49BB /* 04-GLKitTwo */,
+				638BA8711EC406A20057717D /* 05-EarthMoon */,
 				63B46DA71EB96E7E0071AB5F /* Main.storyboard */,
 				63B46DAA1EB96E7E0071AB5F /* Assets.xcassets */,
 				63B46DAC1EB96E7E0071AB5F /* LaunchScreen.storyboard */,
@@ -369,6 +414,9 @@
 				63B46DAE1EB96E7E0071AB5F /* LaunchScreen.storyboard in Resources */,
 				631A69F81EBC5B8400CCCFA6 /* Shader.bundle in Resources */,
 				631A69FA1EBC5D9E00CCCFA6 /* 3D.bundle in Resources */,
+				638BA87B1EC412760057717D /* Moon256x128.png in Resources */,
+				638BA87C1EC412760057717D /* sphere.obj in Resources */,
+				638BA87A1EC412760057717D /* Earth512x256.jpg in Resources */,
 				63B46DE01EB978C10071AB5F /* panda.jpg in Resources */,
 				63B46DAB1EB96E7E0071AB5F /* Assets.xcassets in Resources */,
 				63B46DA91EB96E7E0071AB5F /* Main.storyboard in Resources */,
@@ -402,7 +450,9 @@
 				631A69F21EBC4BE500CCCFA6 /* 3DStudyController.m in Sources */,
 				63B46DA31EB96E7E0071AB5F /* AppDelegate.m in Sources */,
 				63B46DA01EB96E7E0071AB5F /* main.m in Sources */,
+				638BA8881EC431AD0057717D /* AGLKVertexAttribArrayBuffer.m in Sources */,
 				63B46DEC1EB9A8F50071AB5F /* ShaderView.m in Sources */,
+				638BA8741EC406D20057717D /* EarthMoonStudyController.m in Sources */,
 				63B46DE91EB9A8950071AB5F /* ShaderStudyController.m in Sources */,
 				631A6A021EBC64DA00CCCFA6 /* GLESMath.c in Sources */,
 				63B46DD81EB972A30071AB5F /* GLKitStudyController.m in Sources */,

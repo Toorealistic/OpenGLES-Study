@@ -15,6 +15,9 @@
 
 @property (nonatomic, strong) GLKBaseEffect *effect;
 
+@property (nonatomic, strong) AGLKVertexAttribArrayBuffer *vertexAttribPosition;
+@property (nonatomic, strong) AGLKVertexAttribArrayBuffer *vertexAttribTexCoord0;
+
 @end
 
 @implementation GLKitStudyController
@@ -29,35 +32,59 @@
 }
 
 - (void)setupVertexAttribArrayAndTexture {
-    GLfloat vertexAttribArray[] = {
-        0.5, -0.5,    1.0f, 0.0f,
-        0.5, 0.5,     1.0f, 1.0f,
-        -0.0, 0.5,    0.0f, 1.0f,
+    GLfloat position[] = {
+        0.5, -0.5,
+        0.5, 0.5,
+        -0.0, 0.5,
         
-        0.5, -0.5,    1.0f, 0.0f,
-        -0.0, 0.5,    0.0f, 1.0f,
-        -0.0, -0.5,   0.0f, 0.0f,
+        0.5, -0.5,
+        -0.0, 0.5,
+        -0.0, -0.5,
         
-        0.0, 0.5,     0.0f, 1.0f,
-        -0.5, 0.5,    1.0f, 1.0f,
-        0.0, -0.5,    0.0f, 0.0f,
+        0.0, 0.5,
+        -0.5, 0.5,
+        0.0, -0.5,
         
-        -0.5, 0.5,    1.0f, 1.0f,
-        0.0, -0.5,    0.0f, 0.0f,
-        -0.5, -0.5,   1.0f, 0.0f,
+        -0.5, 0.5,
+        0.0, -0.5,
+        -0.5, -0.5,
     };
     
-    GLuint buffer;
-    glGenBuffers(1, &buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexAttribArray), vertexAttribArray, GL_STREAM_DRAW);
+    GLfloat texCoord0[] = {
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+        
+        1.0f, 0.0f,
+        0.0f, 1.0f,
+        0.0f, 0.0f,
+        
+        0.0f, 1.0f,
+        1.0f, 1.0f,
+        0.0f, 0.0f,
+        
+        1.0f, 1.0f,
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+    };
     
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, (GLfloat *)NULL + 0);
+    _vertexAttribPosition = [[AGLKVertexAttribArrayBuffer alloc] initWithAttribStride:2 * sizeof(GLfloat)
+                                                                     numberOfVertices:sizeof(position) / (2 * sizeof(GLfloat))
+                                                                                bytes:position
+                                                                                usage:GL_STATIC_DRAW];
+    [_vertexAttribPosition prepareToDrawWithAttrib:AGLKVertexAttribPosition
+                               numberOfCoordinates:2
+                                      attribOffset:0
+                                      shouldEnable:YES];
     
-    
-    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, (GLfloat *)NULL + 2);
+    _vertexAttribTexCoord0 = [[AGLKVertexAttribArrayBuffer alloc] initWithAttribStride:2 * sizeof(GLfloat)
+                                                                      numberOfVertices:sizeof(texCoord0) / (2 * sizeof(GLfloat))
+                                                                                 bytes:texCoord0
+                                                                                 usage:GL_STATIC_DRAW];
+    [_vertexAttribTexCoord0 prepareToDrawWithAttrib:AGLKVertexAttribTexCoord0
+                                numberOfCoordinates:2
+                                       attribOffset:0
+                                       shouldEnable:YES];
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"panda" ofType:@"jpg"];
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@1, GLKTextureLoaderOriginBottomLeft, nil];
@@ -82,7 +109,10 @@
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     [self.effect prepareToDraw];
-    glDrawArrays(GL_TRIANGLES, 0, 12);
+    
+    [AGLKVertexAttribArrayBuffer drawPreparedArraysWithMode:GL_TRIANGLES
+                                           startVertexIndex:0
+                                           numberOfVertices:12];
 }
 
 - (EAGLContext *)context {
