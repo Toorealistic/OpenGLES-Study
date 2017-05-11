@@ -35,8 +35,8 @@
 
 @implementation EarthMoonStudyController
 
-static const GLfloat SceneEarthAxialTiltDeg = 23.5f;
-static const GLfloat SceneDaysPerMoonOrbit = 28.0f;
+static const GLfloat SceneEarthAxialTiltDeg = 23.5f; // 与赤道的角度
+static const GLfloat SceneDaysPerMoonOrbit = 27.32f; // 月球公转时间
 static const GLfloat SceneMoonRadiusFractionOfEarth = 0.25;
 static const GLfloat SceneMoonDistanceFromEarth = 2.0;
 
