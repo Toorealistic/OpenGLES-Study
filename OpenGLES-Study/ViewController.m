@@ -70,7 +70,8 @@
                   @[@"Shader", @"ShaderStudyController"],
                   @[@"3D", @"_DStudyController"],
                   @[@"GLKitTwo", @"GLKitTwoStudyController"],
-                  @[@"EarthMoon", @"EarthMoonStudyController"],];
+                  @[@"EarthMoon", @"EarthMoonStudyController"],
+                  @[@"光照", @"IlluminationStudyController"],];
     
     return _dataList;
 }
