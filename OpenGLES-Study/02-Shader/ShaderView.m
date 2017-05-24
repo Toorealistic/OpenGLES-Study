@@ -311,13 +311,29 @@
     return program;
 }
 
-- (void)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file {
+- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file {
     NSString *content = [NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
     const GLchar *source = (GLchar *)[content UTF8String];
+    
+    if (!source) {
+        NSLog(@"Failed to load vertex shader");
+        return NO;
+    }
     
     *shader = glCreateShader(type);
     glShaderSource(*shader, 1, &source, NULL);
     glCompileShader(*shader);
+    
+    GLint status;
+    
+    glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
+    if (status == 0)
+    {
+        glDeleteShader(*shader);
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)setupTexture {

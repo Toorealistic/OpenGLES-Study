@@ -163,7 +163,8 @@ static const GLfloat SceneMoonDistanceFromEarth = 2.0;
 
 - (GLKTextureInfo *)earthTextureInfo {
     if (!_earthTextureInfo) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Earth512x256" ofType:@"jpg"];
+        NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSBundle mainBundle] pathForResource:@"EarthMoon" ofType:@"bundle"]];
+        NSString *filePath = [bundle pathForResource:@"Earth512x256" ofType:@"jpg"];
         NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@1, GLKTextureLoaderOriginBottomLeft, nil];
         _earthTextureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:nil];
     }
@@ -173,7 +174,8 @@ static const GLfloat SceneMoonDistanceFromEarth = 2.0;
 
 - (GLKTextureInfo *)moonTextureInfo {
     if (!_moonTextureInfo) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Moon256x128" ofType:@"png"];
+        NSBundle *bundle = [[NSBundle alloc] initWithPath:[[NSBundle mainBundle] pathForResource:@"EarthMoon" ofType:@"bundle"]];
+        NSString *filePath = [bundle pathForResource:@"Moon256x128" ofType:@"png"];
         NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@1, GLKTextureLoaderOriginBottomLeft, nil];
         _moonTextureInfo = [GLKTextureLoader textureWithContentsOfFile:filePath options:options error:nil];
     }

@@ -20,14 +20,14 @@
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
     
-    NSShadow *shadow = [NSShadow new];
-    shadow.shadowColor = [UIColor clearColor];
-    [shadow setShadowColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
-    [shadow setShadowOffset:CGSizeMake(0, 0.7)];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{
-                                                                      NSForegroundColorAttributeName:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
-                                                                      NSFontAttributeName:[UIFont systemFontOfSize:20],
-                                                                      NSShadowAttributeName:shadow}];
+//    NSShadow *shadow = [NSShadow new];
+//    shadow.shadowColor = [UIColor clearColor];
+//    [shadow setShadowColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
+//    [shadow setShadowOffset:CGSizeMake(0, 0.7)];
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{
+//                                                                      NSForegroundColorAttributeName:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
+//                                                                      NSFontAttributeName:[UIFont systemFontOfSize:20],
+//                                                                      NSShadowAttributeName:shadow}];
 }
 
 

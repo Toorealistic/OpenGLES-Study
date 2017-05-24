@@ -71,7 +71,8 @@
                   @[@"3D", @"_DStudyController"],
                   @[@"GLKitTwo", @"GLKitTwoStudyController"],
                   @[@"EarthMoon", @"EarthMoonStudyController"],
-                  @[@"光照", @"IlluminationStudyController"],];
+                  @[@"光照", @"IlluminationStudyController"],
+                  @[@"粒子效果", @"PointParticleEffectStudyController"],];
     
     return _dataList;
 }
