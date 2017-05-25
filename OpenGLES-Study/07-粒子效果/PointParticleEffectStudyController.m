@@ -25,6 +25,8 @@
 
 @property (strong, nonatomic) NSArray *emitterBlocks;
 
+@property (nonatomic, assign) double mElapseTime;
+
 @end
 
 @implementation PointParticleEffectStudyController
@@ -32,6 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.mElapseTime = 0;
     
     [self setupConfig];
     
@@ -74,6 +78,7 @@
     self.effect.texture2d0.enabled = YES;
     self.effect.texture2d0.name = textureInfo.name;
     self.effect.texture2d0.target = textureInfo.target;
+    self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
 }
 
 - (void)setupTransform {
@@ -207,9 +212,8 @@
 - (void)update {
     [_glkView display];
     
-    NSTimeInterval time = self.timeSinceFirstResume;
-    NSLog(@"timeSinceFirstResume: %f", self.timeSinceFirstResume);
-    
+    self.mElapseTime += self.timeSinceLastUpdate;
+    NSTimeInterval time = self.mElapseTime;
     self.effect.elapsedSeconds = time;
     
     if (self.autoSpawnDelta < (time - self.lastSpawnTime)) {
@@ -221,7 +225,7 @@
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0.3, 0.3, 0.3, 1);
     
     [self.effect prepareToDraw];

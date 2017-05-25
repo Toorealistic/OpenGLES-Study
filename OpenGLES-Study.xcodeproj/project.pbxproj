@@ -30,11 +30,11 @@
 		63B46DE91EB9A8950071AB5F /* ShaderStudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DE81EB9A8950071AB5F /* ShaderStudyController.m */; };
 		63B46DEC1EB9A8F50071AB5F /* ShaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B46DEB1EB9A8F50071AB5F /* ShaderView.m */; };
 		63D33EBD1EC000DF002D49BB /* GLKitTwoStudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63D33EBC1EC000DF002D49BB /* GLKitTwoStudyController.m */; };
+		E91F35431ED66C1D002357A8 /* AGLKPointParticleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = E91F35421ED66C1D002357A8 /* AGLKPointParticleEffect.m */; };
 		E988D2C91ED3D7CE0086E3B9 /* IlluminationStudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = E988D2C81ED3D7CE0086E3B9 /* IlluminationStudyController.m */; };
 		E9BE22D01ED55B8C00D764DC /* PointParticleEffectStudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BE22CF1ED55B8C00D764DC /* PointParticleEffectStudyController.m */; };
 		E9BE22D21ED55BDB00D764DC /* EarthMoon.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9BE22D11ED55BDB00D764DC /* EarthMoon.bundle */; };
 		E9BE22D61ED55D4C00D764DC /* PointParticleEffect.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9BE22D51ED55D4C00D764DC /* PointParticleEffect.bundle */; };
-		E9BE22D91ED55EFF00D764DC /* AGLKPointParticleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BE22D81ED55EFF00D764DC /* AGLKPointParticleEffect.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +99,8 @@
 		63B46DEB1EB9A8F50071AB5F /* ShaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderView.m; sourceTree = "<group>"; };
 		63D33EBB1EC000DF002D49BB /* GLKitTwoStudyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKitTwoStudyController.h; sourceTree = "<group>"; };
 		63D33EBC1EC000DF002D49BB /* GLKitTwoStudyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKitTwoStudyController.m; sourceTree = "<group>"; };
+		E91F35411ED66C1D002357A8 /* AGLKPointParticleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLKPointParticleEffect.h; sourceTree = "<group>"; };
+		E91F35421ED66C1D002357A8 /* AGLKPointParticleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLKPointParticleEffect.m; sourceTree = "<group>"; };
 		E988D2C71ED3D7CE0086E3B9 /* IlluminationStudyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IlluminationStudyController.h; sourceTree = "<group>"; };
 		E988D2C81ED3D7CE0086E3B9 /* IlluminationStudyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IlluminationStudyController.m; sourceTree = "<group>"; };
 		E988D2D61ED3DA350086E3B9 /* SceneUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneUtil.h; sourceTree = "<group>"; };
@@ -107,8 +109,6 @@
 		E9BE22D11ED55BDB00D764DC /* EarthMoon.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EarthMoon.bundle; sourceTree = "<group>"; };
 		E9BE22D41ED55C4900D764DC /* sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sphere.h; sourceTree = "<group>"; };
 		E9BE22D51ED55D4C00D764DC /* PointParticleEffect.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PointParticleEffect.bundle; sourceTree = "<group>"; };
-		E9BE22D71ED55EFF00D764DC /* AGLKPointParticleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLKPointParticleEffect.h; sourceTree = "<group>"; };
-		E9BE22D81ED55EFF00D764DC /* AGLKPointParticleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLKPointParticleEffect.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,8 +319,8 @@
 			children = (
 				E9BE22CE1ED55B8C00D764DC /* PointParticleEffectStudyController.h */,
 				E9BE22CF1ED55B8C00D764DC /* PointParticleEffectStudyController.m */,
-				E9BE22D71ED55EFF00D764DC /* AGLKPointParticleEffect.h */,
-				E9BE22D81ED55EFF00D764DC /* AGLKPointParticleEffect.m */,
+				E91F35411ED66C1D002357A8 /* AGLKPointParticleEffect.h */,
+				E91F35421ED66C1D002357A8 /* AGLKPointParticleEffect.m */,
 				E9BE22D51ED55D4C00D764DC /* PointParticleEffect.bundle */,
 			);
 			path = "07-粒子效果";
@@ -479,7 +479,7 @@
 				E988D2C91ED3D7CE0086E3B9 /* IlluminationStudyController.m in Sources */,
 				631A6A021EBC64DA00CCCFA6 /* GLESMath.c in Sources */,
 				63B46DD81EB972A30071AB5F /* GLKitStudyController.m in Sources */,
-				E9BE22D91ED55EFF00D764DC /* AGLKPointParticleEffect.m in Sources */,
+				E91F35431ED66C1D002357A8 /* AGLKPointParticleEffect.m in Sources */,
 				63D33EBD1EC000DF002D49BB /* GLKitTwoStudyController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

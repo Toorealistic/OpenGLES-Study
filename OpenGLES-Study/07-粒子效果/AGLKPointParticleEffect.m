@@ -131,19 +131,23 @@ enum
             self.particleDataWasUpdated = NO;
         }
         
-        [self.particleAttributeBuffer prepareToDrawWithAttrib:AGLKParticleEmissionPosition numberOfCoordinates:3
+        [self.particleAttributeBuffer prepareToDrawWithAttrib:AGLKParticleEmissionPosition
+                                          numberOfCoordinates:3
                                                  attribOffset:offsetof(AGLKParticleAttributes, emissionPosition)
                                                  shouldEnable:YES];
         
-        [self.particleAttributeBuffer prepareToDrawWithAttrib:AGLKParticleEmissionVelocity numberOfCoordinates:3
+        [self.particleAttributeBuffer prepareToDrawWithAttrib:AGLKParticleEmissionVelocity
+                                          numberOfCoordinates:3
                                                  attribOffset:offsetof(AGLKParticleAttributes, emissionVelocity)
                                                  shouldEnable:YES];
         
-        [self.particleAttributeBuffer prepareToDrawWithAttrib:AGLKParticleEmissionForce numberOfCoordinates:3
+        [self.particleAttributeBuffer prepareToDrawWithAttrib:AGLKParticleEmissionForce
+                                          numberOfCoordinates:3
                                                  attribOffset:offsetof(AGLKParticleAttributes, emissionForce)
                                                  shouldEnable:YES];
         
-        [self.particleAttributeBuffer prepareToDrawWithAttrib:AGLKParticleSize numberOfCoordinates:2
+        [self.particleAttributeBuffer prepareToDrawWithAttrib:AGLKParticleSize
+                                          numberOfCoordinates:2
                                                  attribOffset:offsetof(AGLKParticleAttributes, size)
                                                  shouldEnable:YES];
         
@@ -165,7 +169,7 @@ enum
     glDepthMask(GL_FALSE);
     [self.particleAttributeBuffer drawArrayWithMode:GL_POINTS
                                    startVertexIndex:0
-                                   numberOfVertices:(GLsizei)self.numberOfParticles];
+                                   numberOfVertices:(int)self.numberOfParticles];
     glDepthMask(GL_TRUE);
 }
 
@@ -202,6 +206,20 @@ enum
     
     program = [self loadShaders:vFilePath fragment:fFilePath];
     
+    // Bind attribute locations.
+    // This needs to be done prior to linking.
+    glBindAttribLocation(program, AGLKParticleEmissionPosition,
+                         "a_emissionPosition");
+    glBindAttribLocation(program, AGLKParticleEmissionVelocity,
+                         "a_emissionVelocity");
+    glBindAttribLocation(program, AGLKParticleEmissionForce,
+                         "a_emissionForce");
+    glBindAttribLocation(program, AGLKParticleSize,
+                         "a_size");
+    glBindAttribLocation(program, AGLKParticleEmissionTimeAndLife,
+                         "a_emissionAndDeathTimes");
+
+    
     glLinkProgram(program);
     GLint success;
     glGetProgramiv(program, GL_LINK_STATUS, &success);
@@ -218,19 +236,6 @@ enum
         return NO;
     }
     
-    // Bind attribute locations.
-    // This needs to be done prior to linking.
-    glBindAttribLocation(program, AGLKParticleEmissionPosition,
-                         "a_emissionPosition");
-    glBindAttribLocation(program, AGLKParticleEmissionVelocity,
-                         "a_emissionVelocity");
-    glBindAttribLocation(program, AGLKParticleEmissionForce,
-                         "a_emissionForce");
-    glBindAttribLocation(program, AGLKParticleSize,
-                         "a_size");
-    glBindAttribLocation(program, AGLKParticleEmissionTimeAndLife,
-                         "a_emissionAndDeathTimes");
-    
     uniforms[AGLKMVPMatrix] = glGetUniformLocation(program,
                                                    "u_mvpMatrix");
     uniforms[AGLKSamplers2D] = glGetUniformLocation(program,
@@ -239,6 +244,8 @@ enum
                                                  "u_gravity");
     uniforms[AGLKElapsedSeconds] = glGetUniformLocation(program,
                                                         "u_elapsedSeconds");
+    
+    
     
     return YES;
 }
